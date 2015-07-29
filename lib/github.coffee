@@ -35,9 +35,8 @@ GitHub = module.exports =
       .then (newIssue) ->
         if issue.state is 'closed'
           GitHub.patch "#{projectName}/issues/#{newIssue.number}", { state: 'closed' }
-            .then ->
-              for comment in comments
-                GitHub.post "#{projectName}/issues/#{newIssue.number}/comments", comment
+        for comment in comments
+          GitHub.post "#{projectName}/issues/#{newIssue.number}/comments", comment
 
   createMilestone: (projectName, milestone) ->
     return if milestone.state is 'closed'
