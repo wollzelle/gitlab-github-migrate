@@ -14,7 +14,7 @@ Migrate repositories, wikis, issues and milestones from GitLab to GitHub.
   * `GITHUB_USERNAME` - Your GitHub username e.g. `meleyal`
   * `GITHUB_TOKEN` - Your [GitHub API token](https://github.com/settings/tokens)
 
-3. Install dependencies with `npm install`
+3. Install dependencies with `npm install` and `npm install -g coffee-script`
 
 4. List available tasks with `cake`
 
