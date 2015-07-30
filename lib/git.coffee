@@ -1,5 +1,6 @@
 require('dotenv').load()
 require 'shelljs/global'
+_ = require 'underscore'
 GitHub = require './github'
 
 Git = module.exports =
@@ -8,7 +9,7 @@ Git = module.exports =
     { gitlab_name, github_name } = options
     { GITLAB_GIT_URL, GITHUB_ORG } = process.env
 
-    repo = "#{github_name}.git"
+    repo = "#{_.last(gitlab_name.split('/'))}.git"
     gitlabRemote = "#{GITLAB_GIT_URL}:#{gitlab_name}.git"
     githubRemote = "git@github.com:#{GITHUB_ORG}/#{github_name}.git"
 
@@ -20,14 +21,14 @@ Git = module.exports =
     GitHub.createRepo(github_name)
       .then ->
         exec "git push github --mirror"
-        rm '-rf', repo
+        rm "-rf", repo
       .catch (err) -> console.log err.error
 
   migrateWiki: (options) ->
     { gitlab_name, github_name } = options
     { GITLAB_GIT_URL, GITHUB_ORG } = process.env
 
-    repo = "#{github_name}.git"
+    repo = "#{_.last(gitlab_name.split('/'))}.git"
     gitlabRemote = "#{GITLAB_GIT_URL}:#{gitlab_name}.wiki.git"
     githubRemote = "git@github.com:#{GITHUB_ORG}/#{github_name}.wiki.git"
 
