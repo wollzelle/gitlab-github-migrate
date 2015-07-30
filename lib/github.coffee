@@ -30,6 +30,7 @@ GitHub = module.exports =
     delete issue.milestone
     delete issue.assignee
     issue.state = 'open' if issue.state in ['opened', 'reopened']
+    issue.body = issue.description
 
     GitHub.post "#{projectName}/issues", issue
       .then (newIssue) ->
